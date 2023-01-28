@@ -5,6 +5,15 @@ Integrate EV charger into Victron Energies Venus OS by MQTT
 This script supports reading EV charger values from MQTT base charger. Writing values is supported for "Enable charging"and  "Charging current" 
 
 ## Install & Configuration
+You have to run Paho Client on your GXDevice to make this script work
+
+python -m ensurepip --upgrade
+pip install paho-mqtt
+
+### Configuration
+
+In the Python file, you should put the IP of your Broker
+
 ### Get the code
 Just grap a copy of the main branche and copy them to a folder under `/data/` e.g. `/data/dbus-mqttevcharger`.
 After that call the install.sh script.
@@ -19,6 +28,25 @@ chmod a+x /data/dbus-mqttevcharger/install.sh
 rm main.zip
 ```
 ⚠️ Check configuration after that - because service is already installed an running and with wrong connection data (host) you will spam the log-file
+
+### Debugging
+
+You can check the status of the service with svstat:
+
+`svstat /service/dbus-mqttevcharger`
+
+It will show something like this:
+
+`/service/dbus-mqttevcharger: up (pid 10078) 325 seconds`
+
+If the number of seconds is always 0 or 1 or any other small number, it means that the service crashes and gets restarted all the time.
+
+When you think that the script crashes, start it directly from the command line:
+
+`python /data/dbus-mqttevcharger/dbus-mqttevcharger.py`
+
+and see if it throws any error messages.
+
 
 ## Usefull links
 Many thanks. @vikt0rm, @fabian-lauer, @trixing and @Marv2190 project:
