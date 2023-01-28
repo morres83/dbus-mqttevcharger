@@ -21,7 +21,7 @@ After that call the install.sh script.
 The following script should do everything for you:
 ```
 wget https://github.com/morres83/dbus-mqttevcharger/archive/refs/heads/main.zip
-unzip main.zip "dbus-mqttevsharger-main/*" -d /data
+unzip main.zip -d /data
 mv /data/dbus-mqttevcharger-main /data/dbus-mqttevcharger
 chmod a+x /data/dbus-mqttevcharger/install.sh
 /data/dbus-mqttevcharger/install.sh
