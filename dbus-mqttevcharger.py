@@ -242,7 +242,8 @@ def main():
                 '/SetCurrent': {'initial': 0, 'textformat': _a},
                 '/MaxCurrent': {'initial': 0, 'textformat': _a},
                 '/MCU/Temperature': {'initial': 0, 'textformat': _degC},
-                '/StartStop': {'initial': 0, 'textformat': lambda p, v: (str(v))}
+                '/StartStop': {'initial': 0, 'textformat': lambda p, v: (str(v))},
+                '/AutoStart': {'initial': 0, 'textformat': lambda p, v: (str(v))}
             }
         )
 
