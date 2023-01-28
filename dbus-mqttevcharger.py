@@ -92,15 +92,15 @@ def on_message(client, userdata, msg):
                 auto_start_charging = bool(jsonpayload["auto_start_charging"])
                 charger_state = int(jsonpayload["charger_state"])
                 charging_time = int(jsonpayload["charging_time"]) / 1000
-                globalCurrent = int(jsonpayload["global_current"]) / 1000
+                globalCurrent = int(jsonpayload["globalCurrent"]) / 1000
                 
             else:
                 print("Antwort vom MQTT war Null und wurde ignoriert")
 
     except Exception as e:
-        logging.exception("Programm mqttToEVCharger ist abgestuerzt. (on message Funkion)")
+        logging.exception("Programm dbus-mqttevcharger ist abgestuerzt. (on message function)")
         print(e)
-        print("Im mqttToEVCharger Programm ist etwas beim auslesen der Nachrichten schief gegangen")
+        print("Im dbus-mqttevcharger Programm ist etwas beim auslesen der Nachrichten schief gegangen")
 
 
 class DbusEvseChargerService:
