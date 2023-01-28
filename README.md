@@ -10,6 +10,12 @@ You have to run Paho Client on your GXDevice to make this script work
 python -m ensurepip --upgrade
 pip install paho-mqtt
 
+Get two files from the [velib_python](https://github.com/victronenergy/velib_python) and install them on your venus:
+
+        /data/data/dbus-mqttevcharger/vedbus.py
+        /data/dbus-mqttevcharger/ve_utils.py
+
+
 ### Configuration
 
 In the Python file, you should put the IP of your Broker
