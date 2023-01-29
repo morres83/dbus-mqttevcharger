@@ -198,7 +198,7 @@ class DbusEvseChargerService:
             client.publish("evcharger/command/startStop", value)
             return True
         elif path == '/AutoStart':
-            client.publish("evcharger/command/autoStart", value)
+            client.publish("evcharger/command/autoStart", True if value else False)
             return True
         else:
             logging.info("mapping for evcharger path %s does not exist" % (path))
