@@ -161,7 +161,7 @@ class DbusEvseChargerService:
         self._dbusservice['/ChargingTime'] = charging_time
         self._dbusservice['/Connected'] = mqttConnected
         self._dbusservice['/Current'] = totalCurrent
-        if int(1) == 1: #qq ??
+        if charger_state == 3:
             self._dbusservice['/StartStop'] = 1
         else:
             self._dbusservice['/StartStop'] = 0
