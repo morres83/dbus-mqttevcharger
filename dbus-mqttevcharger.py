@@ -42,7 +42,7 @@ evChargerMQTTPath = "evcharger/data" #qq umfaktorieren
 # Variblen setzen
 mqttConnected = 0
 powerL1, powerL2, powerL3 = 0, 0, 0
-totalCurrent, actualPower = 0, 0
+totalCurrent, actualPower, actual_charging_energy = 0, 0, 0
 auto_start_charging = True
 charger_state, charging_time = 0,0
 globalCurrent = 32
@@ -80,7 +80,7 @@ def on_message(client, userdata, msg):
 
     try:
 
-        global powerL1, powerL2, powerL3, totalCurrent, actualPower, auto_start_charging, charger_state, charging_time, globalCurrent
+        global powerL1, powerL2, powerL3, totalCurrent, actualPower, auto_start_charging, charger_state, charging_time, globalCurrent, actual_charging_energy
         if msg.topic == evChargerMQTTPath:   # JSON String vom EVcharger
             if msg.payload != '{"value": null}' and msg.payload != b'{"value": null}':
                 jsonpayload = json.loads(msg.payload)
@@ -89,6 +89,7 @@ def on_message(client, userdata, msg):
                 powerL3 = float(jsonpayload["powerL3"])
                 totalCurrent = float(jsonpayload["totalCurrent"])
                 actualPower = float(jsonpayload["actualPower"])
+                actual_charging_energy = float(jsonpayload["actual_charging_energy"])
                 auto_start_charging = bool(jsonpayload["auto_start_charging"])
                 charger_state = int(jsonpayload["charger_state"])
                 charging_time = int(jsonpayload["charging_time"]) / 1000
@@ -151,7 +152,7 @@ class DbusEvseChargerService:
         gobject.timeout_add(2000, self._update) # pause 2000ms before the next request
 
     def _update(self):
-        self._dbusservice['/Ac/Energy/Forward'] = 0 #qq ??
+        self._dbusservice['/Ac/Energy/Forward'] = round(actual_charging_energy, 2)
         self._dbusservice['/Ac/L1/Power'] = round(powerL1, 2)
         self._dbusservice['/Ac/L2/Power'] = round(powerL2, 2)
         self._dbusservice['/Ac/L3/Power'] = round(powerL3, 2)
@@ -185,19 +186,20 @@ class DbusEvseChargerService:
         self._dbusservice[path_UpdateIndex] = index
         return True
     
-    def _setEvseChargerValue(self, parameter, value):
-        #geänderte Werte schicken
-        return True
         
     def _handlechangedvalue(self, path, value):##qq komplett
+        global client
         logging.info("someone else updated %s to %s" % (path, value))
 
         if path == '/SetCurrent':
-            return self._setEvseChargerValue('SC+', value)
+            client.publish("evcharger/command/setCurrent", value)
+            return True
         elif path == '/StartStop':
-            return self._setEvseChargerValue('F', '1') #F1
-        elif path == '/MaxCurrent':
-            return self._setEvseChargerValue('ama', value)
+            client.publish("evcharger/command/startStop", value)
+            return True
+        elif path == '/AutoStart':
+            client.publish("evcharger/command/autoStart", value)
+            return True
         else:
             logging.info("mapping for evcharger path %s does not exist" % (path))
             return False
