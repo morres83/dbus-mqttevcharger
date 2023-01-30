@@ -18,7 +18,6 @@ except:
   from gi.repository import GLib as gobject # Python 3.x
 import platform
 import logging
-import time
 import sys
 import json
 import os
