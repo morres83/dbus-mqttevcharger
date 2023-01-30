@@ -7,7 +7,6 @@ This script supports reading EV charger values from MQTT base charger. Writing v
 ## Install & Configuration
 You have to run Paho Client on your GXDevice to make this script work
 
-python -m ensurepip --upgrade
 pip install paho-mqtt
 
 Get two files from the [velib_python](https://github.com/victronenergy/velib_python) and install them on your venus:
