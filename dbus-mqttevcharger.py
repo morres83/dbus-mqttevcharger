@@ -4,12 +4,12 @@
 Changed a lot of a Script originall created by Ralf Zimmermann (mail@ralfzimmermann.de) in 2020.
 The orginal code and its documentation can be found on: https://github.com/RalfZim/venus.dbus-fronius-smartmeter
 Used https://github.com/victronenergy/velib_python/blob/master/dbusdummyservice.py as basis for this service.
+Changed by morres83
 """
 
 """
 /data/Pathtothisscript/vedbus.py
 /data/Pathtothisscript/ve_utils.py
-python -m ensurepip --upgrade
 pip install paho-mqtt
 """
 try:
