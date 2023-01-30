@@ -59,3 +59,4 @@ Many thanks. @vikt0rm, @fabian-lauer, @trixing and @Marv2190 project:
 - https://github.com/fabian-lauer/dbus-shelly-3em-smartmeter
 - https://github.com/vikt0rm/dbus-goecharger
 - https://github.com/Marv2190/venus.dbus-MqttToGridMeter
+- https://github.com/JuWorkshop/dbus-evsecharger
