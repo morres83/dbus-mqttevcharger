@@ -91,7 +91,7 @@ def on_message(client, userdata, msg):
                 actual_charging_energy = float(jsonpayload["actual_charging_energy"])
                 auto_start_charging = bool(jsonpayload["auto_start_charging"])
                 charger_state = int(jsonpayload["charger_state"])
-                charging_time = int(jsonpayload["charging_time"]) / 1000
+                charging_time = int(jsonpayload["charging_time"])
                 globalCurrent = int(jsonpayload["globalCurrent"]) / 1000
                 
             else:
