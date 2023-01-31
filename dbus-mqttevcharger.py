@@ -36,14 +36,14 @@ path_UpdateIndex = '/UpdateIndex'
 # MQTT Setup
 broker_address = "localhost"
 MQTTNAME = "venusEvMQTT"
-evChargerMQTTPath = "evcharger/data" #qq umfaktorieren
+evChargerMQTTPath = "evcharger/data"
 
 # Variblen setzen
 mqttConnected = 0
 powerL1, powerL2, powerL3 = 0, 0, 0
 totalCurrent, actualPower, actual_charging_energy = 0, 0, 0
 auto_start_charging = True
-charger_state, charging_time = 0,0
+charger_state, charging_time = 0, 0
 globalCurrent = 32
 
 def on_disconnect(client, userdata, rc):
@@ -186,7 +186,7 @@ class DbusEvseChargerService:
         return True
     
         
-    def _handlechangedvalue(self, path, value):##qq komplett
+    def _handlechangedvalue(self, path, value):
         global client
         logging.info("someone else updated %s to %s" % (path, value))
 
